@@ -167,7 +167,7 @@ return [
          */
 
         Collective\Html\HtmlServiceProvider::class,
-        Gloudemans\Shoppingcart\ShoppingcartServiceProvider::class,
+        Melihovv\ShoppingCart\ServiceProvider::class,
 
 
         /*
@@ -232,7 +232,7 @@ return [
 
         'Form' => Collective\Html\FormFacade::class,
         'Html' => Collective\Html\FormFacade::class,
-        'Cart' => Gloudemans\Shoppingcart\Facades\Cart::class,
+        'Cart' => Melihovv\ShoppingCart\Facades\ShoppingCart::class,
 
 
     ],
