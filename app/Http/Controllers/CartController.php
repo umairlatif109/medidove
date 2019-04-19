@@ -2,11 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use App\category;
-use App\product;
+
+use App\Product;
+use Gloudemans\Shoppingcart\Facades\Cart;
 use Illuminate\Http\Request;
 
-class ProductController extends Controller
+class CartController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,8 +16,8 @@ class ProductController extends Controller
      */
     public function index()
     {
-        $products=product::all();
-        return view('admin.product.index',compact('products'));
+       $cartItems=Cart::content();
+        return view('cart.index',compact('cartItems'));
     }
 
     /**
@@ -26,8 +27,7 @@ class ProductController extends Controller
      */
     public function create()
     {
-        $categories=category::pluck('name','id');
-        return view('admin.product.create',compact('categories'));
+
     }
 
     /**
@@ -38,32 +38,7 @@ class ProductController extends Controller
      */
     public function store(Request $request)
     {
-  //     the below code use for check the output of code
-
-  //      dd($requestest->all());
-
-        $formInput=$request->except('image');
-
-   //       validation
-            $this->validate($request,[
-               'name'=>'required',
-               'size'=>'required',
-               'price'=>'required',
-               'image'=>'image|mimes:png,jpg,jpeg|max:50000'
-
-                ]);
-  //        image upload
-
-        $image=$request->image;
-        if ($image){
-            $imageName=$image->getClientOriginalName();
-            $image->move('images',$imageName);
-            $formInput['image']=$imageName;
-        }
-
-        product::create($formInput);
-        return redirect()->route('product.index');
-
+        //
     }
 
     /**
@@ -85,7 +60,9 @@ class ProductController extends Controller
      */
     public function edit($id)
     {
-        //
+        $product=Product::find($id);
+
+        Cart::add($id,$product->name,1,$product->price,['size'=>'medium']);
     }
 
     /**

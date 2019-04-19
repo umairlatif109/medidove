@@ -21,7 +21,7 @@
                 </a>
             </li>
             <li>
-                <a href="#">
+                <a href="{{route('cart.index')}}">
                     <i class="fa fa-shopping-cart fa-2x" aria-hidden="true">
                     </i>
                     CART

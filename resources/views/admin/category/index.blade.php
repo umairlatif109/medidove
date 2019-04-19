@@ -67,10 +67,10 @@
            </thead>
             <tbody>
 
-                @forelse($products as $product)
+                @forelse($products as $category_id)
 
                 <tr>
-                    <td>{{$category->name}}</td>
+                        <td>{{$category_id->name}}</td>
                 </tr>
 
                 @empty
